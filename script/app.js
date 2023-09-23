@@ -35,6 +35,11 @@ quotes.push({
         source: "Ray Lewis",
     })
 
+function ClearAllIntervals() {
+    for (var i = 1; i < 99999; i++)
+        window.clearInterval(i);
+}
+
 function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min
 }
@@ -82,4 +87,18 @@ function handler() {
     printQuote()
 }
 
-setInterval(handler, 4000)
+const controlButton = document.querySelector(".control_button")
+const playSVG = document.querySelector(".play-svg")
+const pauseSVG = document.querySelector(".pause-svg")
+controlButton.addEventListener("click", () => {
+    playSVG.classList.toggle("hide")
+    pauseSVG.classList.toggle("hide")
+    var isPlaying = playSVG.classList.contains('hide');
+    if (!isPlaying) {
+        ClearAllIntervals()
+        return
+    }
+    setInterval(handler, 5000)
+})
+
+
